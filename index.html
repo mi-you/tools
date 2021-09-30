@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <style>
+      html,body{
+        background: #f1f1f1;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='div'>
+      test
+    </div>
+    <script type='module'>
+      import fs from './fullscreen.js';
+      import { throttle,debounce } from './method.js';
+      document.getElementById('div').onclick = function(e){
+        console.log(fs)
+        fs.requestFullscreen(this)
+        .then(res => console.log(res,fs))
+        .catch(err => console.log(err))
+      }
+      function mouseMove(e){
+        console.log(e)
+      }
+      var TMouseMove = throttle(mouseMove,100)
+      var DMouseMove = debounce(mouseMove,100)
+      document.body.addEventListener('mousemove',function(){
+        TMouseMove(123)
+        DMouseMove('***')
+      },false)
+    </script>
+  </body>
+</html>
